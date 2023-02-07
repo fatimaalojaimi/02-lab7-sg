@@ -10,14 +10,14 @@ module "efs_services_sg" {
   ingress_rules       = ["http-80-tcp"]
   ingress_with_cidr_blocks = [
     {
-      from_port   = 2049
-      to_port     = 2049
+      from_port   = 8080
+      to_port     = 8090
       protocol    = "tcp"
       description = "NFS"
       cidr_blocks = "0.0.0.0/0"
     },
     {
-      rule        = "nfs-2049-udp"
+      rule        = "postgresql-tcp"
       cidr_blocks = "0.0.0.0/0"
   }]
 
