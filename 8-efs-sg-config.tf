@@ -6,15 +6,15 @@ module "efs_services_sg" {
   description = "Allow access to efs services"
   vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
 
-  ingress_cidr_blocks = ["10.0.0.0/16"]
-  ingress_rules       = ["https-443-tcp"]
+  ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_rules       = ["http-80-tcp"]
   ingress_with_cidr_blocks = [
     {
-      from_port   = 8080
-      to_port     = 8080
+      from_port   = 2049
+      to_port     = 2049
       protocol    = "tcp"
       description = "NFS"
-      cidr_blocks = "10.0.0.0/16"
+      cidr_blocks = "0.0.0.0/0"
     },
     {
       rule        = "nfs-2049-udp"
