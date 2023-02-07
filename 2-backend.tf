@@ -11,10 +11,12 @@ terraform {
 }
 
 # Restore the VPC and Subnet state files from Terraform Cloud
+data "terraform_remote_state" "vpc" {
+  backend = "remote"
 
-data "tfe_outputs" "vpc" {
   config = {
     organization = "fatimaoj-aws-arch"
+
     workspaces = {
       name = "01-lab7-vpc"
     }
@@ -23,6 +25,6 @@ data "tfe_outputs" "vpc" {
 
 resource "aws_instance" "redis_server" {
   # Terraform 0.12 and later: use the "outputs.<OUTPUT NAME>" attribute
-  subnet_id = data.tfe_outputs.vpc.outputs.subnet_id
+  subnet_id = data.terraform_remote_state.vpc.outputs.subnet_id
 }
 
