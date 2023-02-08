@@ -7,8 +7,8 @@ module "db_services_sg" {
   vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["mysql-3306-tcp"]
-
+  ingress_rules= ["all-all"]
   egress_rules = ["all-all"]
+
 
 }
